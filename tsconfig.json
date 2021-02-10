@@ -4,11 +4,11 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "lib": ["es2019"],
-    "sourceMap": true,    
-    "outDir": "dist",             //diretorio onde ficara o código conpilado
+    "sourceMap": true,
+    "outDir": "dist",
     "strict": true,
     "noImplicitAny": true,
-    "strictNullChecks": true,     //Não deixa tu definir variaveis ou constantes como null ou undefined
+    "strictNullChecks": true,
     "strictFunctionTypes": true,
     "noImplicitThis": true,
     "resolveJsonModule": true,
