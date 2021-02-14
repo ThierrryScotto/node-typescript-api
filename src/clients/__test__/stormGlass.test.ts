@@ -1,3 +1,4 @@
+  
 import { StormGlass } from '@src/clients/stormGlass';
 import stormglassNormalizedResponseFixture from '@test/fixtures/stormglass_normalized_response_3_hours.json';
 import * as stormglassWeatherPointFixture from '@test/fixtures/stormglass_weather_3_hours.json';
