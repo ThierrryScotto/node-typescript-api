@@ -1,6 +1,6 @@
 
 import { InternalError } from '@src/util/errors/internal-error';
-import axios, { AxiosStatic } from 'axios';
+import * as HTTPUtil from '@src/util/request';
 import config, { IConfig } from 'config';
 
 export interface StormGlassPointSource {
@@ -58,7 +58,7 @@ export class StormGlass {
     'swellDirection,swellHeight,swellPeriod,waveDirection,waveHeight,windDirection,windSpeed';
   readonly stormGlassAPISource = 'noaa';
 
-  constructor(protected request: AxiosStatic = axios) {}
+  constructor(protected request = new HTTPUtil.Request()) {};
 
   public async fetchPoints(lat: number, lng: number): Promise<ForecastPoint[]> {
     try {
@@ -72,7 +72,7 @@ export class StormGlass {
       );
       return this.normalizeResponse(response.data);
     } catch (err) {
-      if (err.response && err.response.status) {
+      if (HTTPUtil.Request.isRequestError(err)) {
         throw new StormGlassResponseError(
           `Error: ${JSON.stringify(err.response.data)} Code: ${
             err.response.status
@@ -81,7 +81,8 @@ export class StormGlass {
       }
       throw new ClientRequestError(err.message);
     }
-  }
+  };
+
   private normalizeResponse(
     points: StormGlassForecastResponse
   ): ForecastPoint[] {
@@ -95,7 +96,7 @@ export class StormGlass {
       windDirection   : point.windDirection[this.stormGlassAPISource],
       windSpeed       : point.windSpeed[this.stormGlassAPISource],
     }));
-  }
+  };
 
   private isValidPoint(point: Partial<StormGlassPoint>): boolean {
     return !!(
@@ -108,5 +109,5 @@ export class StormGlass {
       point.windDirection?.[this.stormGlassAPISource] &&
       point.windSpeed?.[this.stormGlassAPISource]
     );
-  }
+  };
 }
