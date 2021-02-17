@@ -18,7 +18,9 @@ export class ForecastProcessingInternalError extends InternalError {
 export class Forecast {
   constructor(protected stormGlass = new StormGlass()) {}
 
-  public async processForecastForBeaches(beaches: Beach[]): Promise<TimeForecast[]> {
+  public async processForecastForBeaches(
+    beaches: Beach[]
+  ): Promise<TimeForecast[]> {
     const pointsWithCorrectSources: BeachForecast[] = [];
     try {
       for (const beach of beaches) {
