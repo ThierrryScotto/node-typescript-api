@@ -57,7 +57,7 @@ export class StormGlass {
     'swellDirection,swellHeight,swellPeriod,waveDirection,waveHeight,windDirection,windSpeed';
   readonly stormGlassAPISource = 'noaa';
 
-  constructor(protected request = new HTTPUtil.Request()) {};
+  constructor(protected request = new HTTPUtil.Request()) {}
 
   public async fetchPoints(lat: number, lng: number): Promise<ForecastPoint[]> {
     try {
@@ -80,7 +80,7 @@ export class StormGlass {
       }
       throw new ClientRequestError(err.message);
     }
-  };
+  }
 
   private normalizeResponse(
     points: StormGlassForecastResponse
@@ -95,7 +95,7 @@ export class StormGlass {
       windDirection   : point.windDirection[this.stormGlassAPISource],
       windSpeed       : point.windSpeed[this.stormGlassAPISource],
     }));
-  };
+  }
 
   private isValidPoint(point: Partial<StormGlassPoint>): boolean {
     return !!(
@@ -108,5 +108,5 @@ export class StormGlass {
       point.windDirection?.[this.stormGlassAPISource] &&
       point.windSpeed?.[this.stormGlassAPISource]
     );
-  };
+  }
 }
