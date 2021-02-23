@@ -1,6 +1,11 @@
+import { User } from '@src/models/user';
 import bcrypt from 'bcrypt';
 import config from 'config';
 import jwt from 'jsonwebtoken';
+
+export interface DecodedUser extends Omit<User, '_id'> {
+  id: string;
+}
 
 export default class AuthService {
   public static async hashPassword(
@@ -22,4 +27,8 @@ export default class AuthService {
       expiresIn: config.get('App.auth.tokenExpiresIn'),
     });
   }
+
+  public static decodedToken(token: string): DecodedUser {
+    return jwt.verify(token, config.get('App.auth.key')) as DecodedUser;
+  } 
 }
