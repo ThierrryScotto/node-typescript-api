@@ -1,4 +1,3 @@
-  
 import { StormGlass } from '@src/clients/stormGlass';
 import stormGlassNormalizedResponseFixture from '@test/fixtures/stormglass_normalized_response_3_hours.json';
 import { Forecast, ForecastProcessingInternalError } from '../forecast';
@@ -18,6 +17,7 @@ describe('Forecast Service', () => {
         lng: 151.289824,
         name: 'Manly',
         position: BeachPosition.E,
+        user: 'fake-id',
       },
     ];
     const expectedResponse = [
@@ -100,6 +100,7 @@ describe('Forecast Service', () => {
         lng: 151.289824,
         name: 'Manly',
         position: BeachPosition.E,
+        user: 'fake-id',
       },
     ];
     mockedStormGlassService.fetchPoints.mockRejectedValue(
